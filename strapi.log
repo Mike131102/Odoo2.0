@@ -1,0 +1,103 @@
+
+> develop
+> strapi develop
+
+- Cleaning dist dir C:/Users/ibert/OneDrive/Odoo2.0/backend/dist
+✔ Cleaning dist dir (52ms)
+- Loading Strapi
+[2026-05-15 19:39:42.814] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+[2026-05-15 19:39:43.030] [33mwarn[39m: admin.auth.options.expiresIn is deprecated and will be removed in Strapi 6. Please configure admin.auth.sessions.maxRefreshTokenLifespan and admin.auth.sessions.maxSessionLifespan.
+[2026-05-15 19:39:43.212] [32minfo[39m: [bootstrap] Granted 2 public API permissions
+- Building build context
+[INFO] Including the following ENV variables as part of the JS bundle:
+    - ADMIN_PATH
+    - STRAPI_ADMIN_BACKEND_URL
+    - STRAPI_TELEMETRY_DISABLED
+    - STRAPI_AI_URL
+    - STRAPI_ANALYTICS_URL
+✔ Building build context (192ms)
+- Creating admin
+✔ Creating admin (755ms)
+✔ Loading Strapi (4068ms)
+- Generating types
+✔ Generating types (564ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/ibert/OneDrive/Odoo2.0/backend/dist
+✔ Cleaning dist dir (90ms)
+✔ Compiling TS (4043ms)
+
+ Project information
+
+[90m┌────────────────────[39m[90m┬──────────────────────────────────────────────────┐[39m
+[90m│[39m Time               [90m│[39m Fri May 15 2026 19:39:48 GMT+0200 (Mitteleuropä… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 8697 ms                                          [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 15508                                            [90m│[39m
+[90m│[39m Version            [90m│[39m 5.46.0 (node v24.15.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m sqlite                                           [90m│[39m
+[90m│[39m Database name      [90m│[39m .tmp\data.db                                     [90m│[39m
+[90m└────────────────────[39m[90m┴──────────────────────────────────────────────────┘[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1337
+
+[2026-05-15 19:39:48.818] [32minfo[39m: Strapi started successfully
+[2026-05-15 19:41:01.989] [32mhttp[39m: GET /api/services?status=published (30 ms) 200
+[2026-05-15 19:41:02.067] [32mhttp[39m: GET /api/faqs?status=published (10 ms) 200
+[2026-05-15 19:41:02.078] [32mhttp[39m: GET /api/blog-posts?status=published (8 ms) 200
+[2026-05-15 19:41:02.088] [32mhttp[39m: GET /api/homepage?status=published (5 ms) 200
+[2026-05-15 19:41:02.106] [32mhttp[39m: GET /api/global (4 ms) 200
+[2026-05-15 19:42:06.680] [32mhttp[39m: GET /admin/settings/api-tokens/3 (71 ms) 200
+[2026-05-15 19:42:07.865] [32mhttp[39m: GET /admin/project-type (7 ms) 200
+[2026-05-15 19:42:09.204] [32mhttp[39m: GET /admin/init (11 ms) 200
+[2026-05-15 19:42:09.225] [32mhttp[39m: GET /admin/users/me (12 ms) 401
+[2026-05-15 19:42:09.231] [32mhttp[39m: GET /admin/users/me/permissions (5 ms) 401
+[2026-05-15 19:42:09.276] [32mhttp[39m: GET /admin/information (7 ms) 401
+[2026-05-15 19:42:09.284] [32mhttp[39m: GET /admin/telemetry-properties (7 ms) 401
+[2026-05-15 19:42:09.362] [32mhttp[39m: POST /admin/access-token (74 ms) 200
+[2026-05-15 19:42:09.441] [32mhttp[39m: GET /admin/users/me (52 ms) 200
+[2026-05-15 19:42:09.492] [32mhttp[39m: GET /admin/users/me/permissions (98 ms) 200
+[2026-05-15 19:42:09.514] [32mhttp[39m: GET /admin/information (118 ms) 200
+[2026-05-15 19:42:09.661] [32mhttp[39m: GET /admin/guided-tour-meta (30 ms) 200
+[2026-05-15 19:42:09.674] [32mhttp[39m: GET /admin/license-limit-information (11 ms) 200
+[2026-05-15 19:42:09.934] [32mhttp[39m: GET /admin/content-api/permissions (25 ms) 200
+[2026-05-15 19:42:09.966] [32mhttp[39m: GET /admin/content-api/routes (29 ms) 200
+[2026-05-15 19:42:11.737] [32mhttp[39m: GET /api/homepage?status=published (7 ms) 200
+[2026-05-15 19:42:11.757] [32mhttp[39m: GET /api/services?sort=order:asc&pagination[limit]=10&status=published (16 ms) 200
+[2026-05-15 19:42:11.771] [32mhttp[39m: GET /api/faqs?sort=order:asc&pagination[limit]=20&status=published (12 ms) 200
+[2026-05-15 19:42:11.786] [32mhttp[39m: GET /api/blog-posts?sort=publishedAt:desc&pagination[limit]=3&status=published (12 ms) 200
+[2026-05-15 19:42:11.794] [32mhttp[39m: GET /api/global (6 ms) 200
+[2026-05-15 19:42:34.551] [32mhttp[39m: GET /api/homepage?status=published (4 ms) 200
+[2026-05-15 19:42:34.564] [32mhttp[39m: GET /api/services?sort=order:asc&pagination[limit]=10&status=published (11 ms) 200
+[2026-05-15 19:42:34.574] [32mhttp[39m: GET /api/faqs?sort=order:asc&pagination[limit]=20&status=published (8 ms) 200
+[2026-05-15 19:42:34.585] [32mhttp[39m: GET /api/blog-posts?sort=publishedAt:desc&pagination[limit]=3&status=published (8 ms) 200
+[2026-05-15 19:42:34.591] [32mhttp[39m: GET /api/global (4 ms) 200
+[2026-05-15 19:48:43.874] [32mhttp[39m: GET /content-manager/init (20 ms) 200
+[2026-05-15 19:48:43.909] [32mhttp[39m: GET /content-manager/content-types-settings (32 ms) 200
+[2026-05-15 19:48:44.010] [32mhttp[39m: GET /content-manager/init (17 ms) 200
+[2026-05-15 19:48:44.068] [32mhttp[39m: GET /content-manager/content-types/api::blog-post.blog-post/configuration (18 ms) 200
+[2026-05-15 19:48:44.136] [32mhttp[39m: GET /content-manager/collection-types/api::blog-post.blog-post?page=1&pageSize=10&sort=title%3AASC (35 ms) 200
+[2026-05-15 19:48:44.269] [32mhttp[39m: GET /admin/ai-feature-config (18 ms) 404
+[2026-05-15 19:48:44.283] [32mhttp[39m: GET /i18n/locales (13 ms) 200
+[2026-05-15 19:48:48.609] [32mhttp[39m: GET /content-manager/content-types/api::faq.faq/configuration (15 ms) 200
+[2026-05-15 19:48:48.672] [32mhttp[39m: GET /content-manager/collection-types/api::faq.faq?page=1&pageSize=10&sort=question%3AASC (26 ms) 200
+[2026-05-15 19:48:48.768] [32mhttp[39m: GET /admin/ai-feature-config (17 ms) 404
+[2026-05-15 19:48:49.850] [32mhttp[39m: GET /content-manager/content-types/plugin::users-permissions.user/configuration (18 ms) 200
+[2026-05-15 19:48:49.878] [32mhttp[39m: GET /content-manager/collection-types/plugin::users-permissions.user?page=1&pageSize=10&sort=username%3AASC (21 ms) 200
+[2026-05-15 19:48:50.603] [32mhttp[39m: GET /content-manager/content-types/api::service.service/configuration (14 ms) 200
+[2026-05-15 19:48:50.630] [32mhttp[39m: GET /content-manager/collection-types/api::service.service?page=1&pageSize=10&sort=title%3AASC (18 ms) 200
+[2026-05-15 19:48:50.709] [32mhttp[39m: GET /admin/ai-feature-config (15 ms) 404
+[2026-05-15 19:48:52.585] [32mhttp[39m: GET /admin/homepage/layout (14 ms) 200
+[2026-05-15 19:48:52.606] [32mhttp[39m: GET /content-manager/homepage/count-documents (21 ms) 200
+[2026-05-15 19:48:52.621] [32mhttp[39m: GET /admin/homepage/key-statistics (14 ms) 200
+[2026-05-15 19:48:52.820] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=update (38 ms) 200
+[2026-05-15 19:48:52.850] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=publish (30 ms) 200
+[2026-05-15 19:48:54.215] [32mhttp[39m: GET /admin/ai-usage (16 ms) 404
+[2026-05-15 19:48:54.231] [32mhttp[39m: GET /content-type-builder/schema (13 ms) 200
+[2026-05-15 19:48:54.243] [32mhttp[39m: GET /content-type-builder/reserved-names (11 ms) 200
+[2026-05-15 19:48:54.272] [32mhttp[39m: GET /admin/ai-token (27 ms) 404
+[2026-05-15 19:48:54.451] [32mhttp[39m: GET /admin/ai-token (14 ms) 404

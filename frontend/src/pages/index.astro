@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import WhyUs from '../components/WhyUs.astro';
+import FAQAccordion from '../components/FAQ';
+import BlogTeaser from '../components/BlogTeaser.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Footer from '../components/Footer.astro';
+
+import { getHomepage, getServices, getFaqs, getBlogPosts, getGlobal } from '../lib/strapi';
+import { extractRichText } from '../types/strapi';
+
+const [hp, services, faqs, blogPosts, gl] = await Promise.all([
+  getHomepage(),
+  getServices(),
+  getFaqs(),
+  getBlogPosts(3),
+  getGlobal(),
+]);
+
+const faqItems = faqs.map((f) => ({
+  id: f.id,
+  question: f.question,
+  answer: extractRichText(f.answer),
+  category: f.category,
+}));
+---
+
+<Layout
+  title={hp?.seoTitle}
+  description={hp?.seoDescription}
+  keywords={hp?.seoKeywords}
+  ogTitle={hp?.ogTitle}
+  ogDescription={hp?.ogDescription}
+>
+  <Nav />
+  <main>
+    <Hero
+      title={hp?.heroTitle || 'Ihr erfahrener Odoo-Partner in Deutschland'}
+      subtitle={hp?.heroSubtitle || 'Wir begleiten mittelstaendische Unternehmen bei der Einfuehrung und Optimierung von Odoo.'}
+      ctaPrimary={hp?.heroCTAPrimary || 'Kostenlose Erstberatung'}
+      ctaSecondary={hp?.heroCTASecondary}
+      ctaPrimaryLink={hp?.heroCTAPrimaryLink || '#contact'}
+      ctaSecondaryLink={hp?.heroCTASecondaryLink || '#services'}
+    />
+    <Services services={services} introTitle={hp?.introTitle} introText={hp?.introText} />
+    <WhyUs />
+    <FAQAccordion client:load faqs={faqItems} />
+    <BlogTeaser posts={blogPosts} />
+    <ContactCTA phone={gl?.phone} email={gl?.email} />
+  </main>
+  <Footer
+    companyName={gl?.companyName}
+    footerText={gl?.footerText}
+    phone={gl?.phone}
+    email={gl?.email}
+    address={gl?.address}
+    city={gl?.city}
+    postalCode={gl?.postalCode}
+    linkedinUrl={gl?.linkedinUrl}
+  />
+</Layout>

@@ -1,0 +1,59 @@
+{
+  "kind": "singleType",
+  "collectionName": "globals",
+  "info": {
+    "singularName": "global",
+    "pluralName": "globals",
+    "displayName": "Globale Einstellungen",
+    "description": "Kontakt, Footer und globale Einstellungen"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "companyName": {
+      "type": "string",
+      "required": true
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "address": {
+      "type": "text"
+    },
+    "city": {
+      "type": "string"
+    },
+    "postalCode": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "default": "Deutschland"
+    },
+    "footerText": {
+      "type": "text"
+    },
+    "linkedinUrl": {
+      "type": "string"
+    },
+    "xingUrl": {
+      "type": "string"
+    },
+    "siteUrl": {
+      "type": "string"
+    },
+    "impressumUrl": {
+      "type": "string"
+    },
+    "datenschutzUrl": {
+      "type": "string"
+    }
+  }
+}

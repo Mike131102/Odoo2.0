@@ -1,0 +1,89 @@
+---
+const navLinks = [
+  { href: '#services', label: 'Leistungen' },
+  { href: '#about', label: 'Ueber uns' },
+  { href: '#blog', label: 'Blog' },
+  { href: '#faq', label: 'FAQ' },
+  { href: '#contact', label: 'Kontakt' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-odoo-border">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <span class="font-bold text-odoo-dark text-lg">
+          Odoo <span class="text-brand">Beratung</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="px-4 py-2 rounded-lg text-sm font-medium text-odoo-muted hover:text-brand hover:bg-brand-50 transition-colors duration-150"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- CTA -->
+      <a href="#contact" class="hidden md:inline-flex btn-primary text-xs px-4 py-2">
+        Erstberatung anfragen
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg text-odoo-muted hover:bg-gray-100"
+        aria-label="Menu oeffnen"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <ul class="flex flex-col gap-1">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="block px-4 py-2 rounded-lg text-sm font-medium text-odoo-muted hover:text-brand hover:bg-brand-50"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+        <li class="mt-2">
+          <a href="#contact" class="btn-primary w-full justify-center text-xs">
+            Erstberatung anfragen
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+
+  // Close mobile menu when link is clicked
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => menu.classList.add('hidden'));
+  });
+</script>

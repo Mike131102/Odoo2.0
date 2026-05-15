@@ -1,0 +1,57 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage",
+    "description": "Hero-Bereich und SEO der Startseite"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "heroTitle": {
+      "type": "string",
+      "required": true
+    },
+    "heroSubtitle": {
+      "type": "text",
+      "required": true
+    },
+    "heroCTAPrimary": {
+      "type": "string",
+      "required": true
+    },
+    "heroCTASecondary": {
+      "type": "string"
+    },
+    "heroCTAPrimaryLink": {
+      "type": "string"
+    },
+    "heroCTASecondaryLink": {
+      "type": "string"
+    },
+    "introTitle": {
+      "type": "string"
+    },
+    "introText": {
+      "type": "text"
+    },
+    "seoTitle": {
+      "type": "string"
+    },
+    "seoDescription": {
+      "type": "text"
+    },
+    "seoKeywords": {
+      "type": "string"
+    },
+    "ogTitle": {
+      "type": "string"
+    },
+    "ogDescription": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Odoo Beratung & Implementierung – Ihr Partner in Deutschland',
+  description = 'Professionelle Odoo ERP Beratung, Implementierung und Schulung fuer den deutschen Mittelstand. Kostenlose Erstberatung.',
+  keywords = 'Odoo Beratung, Odoo Implementierung, Odoo Partner Deutschland, ERP Beratung',
+  ogTitle,
+  ogDescription,
+  canonical = Astro.url.href,
+} = Astro.props;
+
+const finalOgTitle = ogTitle || title;
+const finalOgDescription = ogDescription || description;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={finalOgTitle} />
+    <meta property="og:description" content={finalOgDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="de_DE" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={finalOgTitle} />
+    <meta name="twitter:description" content={finalOgDescription} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <title>{title}</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Odoo Beratung Deutschland",
+        "description": description,
+        "url": "https://odoo-beratung-deutschland.de",
+        "areaServed": "DE",
+        "serviceType": "ERP Beratung und Implementierung",
+        "priceRange": "$$",
+      })}
+    </script>
+  </head>
+  <body class="font-sans text-odoo-text bg-white antialiased">
+    <slot />
+  </body>
+</html>
