@@ -5,35 +5,28 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 4rem; /* offset for fixed nav */
   }
+  h1, h2, h3, h4 { @apply font-bold tracking-tight; }
 
-  h1, h2, h3, h4 {
-    @apply font-bold tracking-tight;
-  }
+  /* Improve text rendering */
+  body { @apply antialiased; }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg bg-brand text-white font-semibold text-sm transition-all duration-200 hover:bg-brand-dark hover:shadow-card-hover focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl bg-brand text-white font-semibold text-sm transition-all duration-200 hover:bg-brand-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2;
   }
-
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-brand text-brand font-semibold text-sm transition-all duration-200 hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl border-2 border-brand text-brand font-semibold text-sm transition-all duration-200 hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2;
   }
-
-  .btn-outline-white {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-white text-white font-semibold text-sm transition-all duration-200 hover:bg-white hover:text-brand focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2;
-  }
-
   .section-title {
     @apply text-3xl md:text-4xl font-bold text-odoo-dark;
   }
-
   .section-subtitle {
-    @apply text-lg text-odoo-muted mt-4 max-w-2xl;
+    @apply text-base md:text-lg text-odoo-muted mt-3 max-w-2xl leading-relaxed;
   }
-
   .card {
-    @apply bg-white rounded-2xl p-6 shadow-card transition-all duration-200 hover:shadow-card-hover hover:-translate-y-1;
+    @apply bg-white rounded-2xl p-6 border border-odoo-border shadow-card transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5;
   }
 }

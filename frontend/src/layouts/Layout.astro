@@ -11,16 +11,32 @@ interface Props {
 }
 
 const {
-  title = 'Odoo Beratung & Implementierung – Ihr Partner in Deutschland',
-  description = 'Professionelle Odoo ERP Beratung, Implementierung und Schulung fuer den deutschen Mittelstand. Kostenlose Erstberatung.',
-  keywords = 'Odoo Beratung, Odoo Implementierung, Odoo Partner Deutschland, ERP Beratung',
+  title       = 'Odoo Beratung & Implementierung – Ihr Partner in Deutschland',
+  description = 'Professionelle Odoo ERP Beratung, Implementierung und Schulung für den deutschen Mittelstand. Kostenlose Erstberatung.',
+  keywords    = 'Odoo Beratung, Odoo Implementierung, Odoo Partner Deutschland, ERP Beratung',
   ogTitle,
   ogDescription,
-  canonical = Astro.url.href,
+  canonical   = Astro.url.href,
 } = Astro.props;
 
-const finalOgTitle = ogTitle || title;
-const finalOgDescription = ogDescription || description;
+const resolvedOgTitle       = ogTitle       || title;
+const resolvedOgDescription = ogDescription || description;
+
+const jsonLd = JSON.stringify({
+  '@context':   'https://schema.org',
+  '@type':      'ProfessionalService',
+  name:         'Odoo Beratung Deutschland',
+  description,
+  url:          'https://odoo-beratung-deutschland.de',
+  areaServed:   'DE',
+  serviceType:  'ERP Beratung und Implementierung',
+  priceRange:   '$$',
+  address: {
+    '@type':           'PostalAddress',
+    addressLocality:   'München',
+    addressCountry:    'DE',
+  },
+});
 ---
 
 <!doctype html>
@@ -34,37 +50,37 @@ const finalOgDescription = ogDescription || description;
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={finalOgTitle} />
-    <meta property="og:description" content={finalOgDescription} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content="de_DE" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content={resolvedOgTitle} />
+    <meta property="og:description" content={resolvedOgDescription} />
+    <meta property="og:url"         content={canonical} />
+    <meta property="og:locale"      content="de_DE" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={finalOgTitle} />
-    <meta name="twitter:description" content={finalOgDescription} />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={resolvedOgTitle} />
+    <meta name="twitter:description" content={resolvedOgDescription} />
 
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Font preload for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
     <title>{title}</title>
 
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Odoo Beratung Deutschland",
-        "description": description,
-        "url": "https://odoo-beratung-deutschland.de",
-        "areaServed": "DE",
-        "serviceType": "ERP Beratung und Implementierung",
-        "priceRange": "$$",
-      })}
-    </script>
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={jsonLd} />
   </head>
   <body class="font-sans text-odoo-text bg-white antialiased">
     <slot />
