@@ -5,11 +5,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4rem; /* offset for fixed nav */
+    scroll-padding-top: 4.5rem; /* 72px — nav is 64px + 8px breathing room */
   }
   h1, h2, h3, h4 { @apply font-bold tracking-tight; }
-
-  /* Improve text rendering */
   body { @apply antialiased; }
 }
 

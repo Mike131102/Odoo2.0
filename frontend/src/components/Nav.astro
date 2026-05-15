@@ -1,7 +1,7 @@
 ---
 const navLinks = [
   { href: '#services', label: 'Leistungen' },
-  { href: '#about',   label: 'Über uns'   },
+  { href: '#about',   label: 'Ueber uns'  },
   { href: '#blog',    label: 'Blog'        },
   { href: '#faq',     label: 'FAQ'         },
   { href: '#contact', label: 'Kontakt'     },
@@ -13,7 +13,7 @@ const navLinks = [
     <div class="flex items-center justify-between h-16">
 
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2.5 group" aria-label="Odoo Beratung – Startseite">
+      <a href="/" class="flex items-center gap-2.5" aria-label="Odoo Beratung – Startseite">
         <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
           <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -24,13 +24,13 @@ const navLinks = [
         </span>
       </a>
 
-      <!-- Desktop nav -->
+      <!-- Desktop links -->
       <ul class="hidden md:flex items-center gap-0.5" role="list">
         {navLinks.map((link) => (
           <li>
             <a
               href={link.href}
-              class="px-3.5 py-2 rounded-lg text-sm font-medium text-odoo-muted hover:text-brand hover:bg-brand-50 transition-colors duration-150"
+              class="px-3.5 py-2 rounded-lg text-sm font-medium text-odoo-muted hover:text-brand hover:bg-brand-50 transition-colors"
             >
               {link.label}
             </a>
@@ -38,27 +38,25 @@ const navLinks = [
         ))}
       </ul>
 
-      <!-- CTA -->
       <a href="#contact" class="hidden md:inline-flex btn-primary text-xs px-4 py-2">
         Erstberatung anfragen
       </a>
 
-      <!-- Mobile toggle -->
+      <!-- Mobile toggle button -->
       <button
         id="mobile-menu-btn"
         class="md:hidden p-2 rounded-lg text-odoo-muted hover:bg-gray-100 transition-colors"
-        aria-label="Menü öffnen"
+        aria-label="Menue oeffnen"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
+        <svg id="icon-open"  class="w-5 h-5"         fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="w-5 h-5 hidden"  fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden pb-4" role="dialog" aria-label="Mobilmenü">
+    <!-- Mobile menu — plain disclosure, NOT a dialog -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
       <ul class="flex flex-col gap-1" role="list">
         {navLinks.map((link) => (
           <li>
@@ -81,19 +79,25 @@ const navLinks = [
 </header>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
+  const btn   = document.getElementById('mobile-menu-btn') as HTMLButtonElement | null;
+  const menu  = document.getElementById('mobile-menu');
+  const iconO = document.getElementById('icon-open');
+  const iconC = document.getElementById('icon-close');
+
+  function setOpen(open: boolean) {
+    menu?.classList.toggle('hidden', !open);
+    btn?.setAttribute('aria-expanded', String(open));
+    btn?.setAttribute('aria-label', open ? 'Menue schliessen' : 'Menue oeffnen');
+    iconO?.classList.toggle('hidden', open);
+    iconC?.classList.toggle('hidden', !open);
+  }
 
   btn?.addEventListener('click', () => {
-    const isOpen = !menu?.classList.contains('hidden');
-    menu?.classList.toggle('hidden');
-    btn.setAttribute('aria-expanded', String(!isOpen));
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    setOpen(!isOpen);
   });
 
-  menu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      menu.classList.add('hidden');
-      btn?.setAttribute('aria-expanded', 'false');
-    });
-  });
+  menu?.querySelectorAll('a').forEach((link) =>
+    link.addEventListener('click', () => setOpen(false))
+  );
 </script>

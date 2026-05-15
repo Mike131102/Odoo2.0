@@ -12,31 +12,32 @@ interface Props {
 
 const {
   title       = 'Odoo Beratung & Implementierung – Ihr Partner in Deutschland',
-  description = 'Professionelle Odoo ERP Beratung, Implementierung und Schulung für den deutschen Mittelstand. Kostenlose Erstberatung.',
+  description = 'Professionelle Odoo ERP Beratung, Implementierung und Schulung fuer den deutschen Mittelstand. Kostenlose Erstberatung.',
   keywords    = 'Odoo Beratung, Odoo Implementierung, Odoo Partner Deutschland, ERP Beratung',
   ogTitle,
   ogDescription,
-  canonical   = Astro.url.href,
+  canonical   = 'https://odoo-beratung-deutschland.de',
 } = Astro.props;
 
 const resolvedOgTitle       = ogTitle       || title;
 const resolvedOgDescription = ogDescription || description;
 
+// Fix: Escape </script> to prevent JSON-LD injection
 const jsonLd = JSON.stringify({
-  '@context':   'https://schema.org',
-  '@type':      'ProfessionalService',
-  name:         'Odoo Beratung Deutschland',
+  '@context':  'https://schema.org',
+  '@type':     'ProfessionalService',
+  name:        'Odoo Beratung Deutschland',
   description,
-  url:          'https://odoo-beratung-deutschland.de',
-  areaServed:   'DE',
-  serviceType:  'ERP Beratung und Implementierung',
-  priceRange:   '$$',
+  url:         'https://odoo-beratung-deutschland.de',
+  areaServed:  'DE',
+  serviceType: 'ERP Beratung und Implementierung',
+  priceRange:  '$$',
   address: {
-    '@type':           'PostalAddress',
-    addressLocality:   'München',
-    addressCountry:    'DE',
+    '@type':         'PostalAddress',
+    addressLocality: 'Muenchen',
+    addressCountry:  'DE',
   },
-});
+}).replace(/<\/script>/gi, '<\\/script>');
 ---
 
 <!doctype html>
@@ -64,22 +65,21 @@ const jsonLd = JSON.stringify({
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Font preload for performance -->
+    <!-- Fonts: preconnect + non-blocking load -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      as="style"
+      rel="preload" as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    </noscript>
 
     <title>{title}</title>
 
-    <!-- Structured Data -->
+    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json" set:html={jsonLd} />
   </head>
   <body class="font-sans text-odoo-text bg-white antialiased">

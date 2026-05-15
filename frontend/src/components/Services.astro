@@ -27,7 +27,7 @@ const fallbackServices: Service[] = [
   { id:6, documentId:'', title:'Odoo Migration',                 description:'Sicherer Umstieg von älteren Odoo-Versionen oder anderen ERP-Systemen auf das aktuelle Odoo.',                               icon:'refresh',      order:6, highlighted:false, createdAt:'', updatedAt:'' },
 ];
 
-const displayServices = services.length > 0 ? services : fallbackServices;
+const displayServices = Array.isArray(services) && services.length > 0 ? services : fallbackServices;
 ---
 
 <section id="services" class="py-20 lg:py-28 bg-odoo-bg">
