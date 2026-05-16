@@ -94,7 +94,7 @@ STRAPI_SEED_TOKEN=<token> node seed.js
 - Brand-Farbe: #714B67 (Odoo Signature Purple)
 - Akzent: #00A09D (Odoo Teal)
 - Font: Inter (Google Fonts)
-- Responsiv: Mobile-first, Breakpoints sm/md/lg
+
 
 ---
 
