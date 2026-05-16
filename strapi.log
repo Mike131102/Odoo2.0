@@ -211,3 +211,5 @@ http://localhost:1337
 [2026-05-15 20:16:26.738] [32mhttp[39m: GET /api/faqs?sort=order:asc&pagination[limit]=20&status=published (6 ms) 200
 [2026-05-15 20:16:26.745] [32mhttp[39m: GET /api/blog-posts?sort=publishedAt:desc&pagination[limit]=3&status=published (4 ms) 200
 [2026-05-15 20:16:26.751] [32mhttp[39m: GET /api/global (4 ms) 200
+[2m10:36:09[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2m.strapi/client/index.html[22m
+[2m10:36:09[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2m.strapi/client/app.js[22m
