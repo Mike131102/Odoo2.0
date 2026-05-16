@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getBlogPosts, getGlobal } from '../../lib/strapi';
+import type { BlogPost } from '../../types/strapi';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts(20);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props:  { post },
+  }));
+}
+
+interface Props { post: BlogPost; }
+const { post } = Astro.props;
+const gl = await getGlobal();
+
+// Same mapping as BlogTeaser.astro — keeps Teaser and Detail in sync
+const topicImages: Record<string, string> = {
+  'ERP Vergleich':   'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop&q=80',
+  'ERP Beratung':    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=630&fit=crop&q=80',
+  'Implementierung': 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=630&fit=crop&q=80',
+};
+
+const coverImage = topicImages[post.category ?? '']
+  ?? 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop&q=80';
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('de-DE', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
+---
+
+<Layout
+  title={post.seoTitle ?? post.title}
+  description={post.seoDescription ?? post.excerpt}
+>
+  <Nav />
+  <main class="pt-24 pb-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Back -->
+      <a href="/blog" class="inline-flex items-center gap-2 text-sm text-odoo-muted hover:text-brand transition-colors mb-8">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Alle Artikel
+      </a>
+
+      <!-- Header -->
+      <header class="mb-8">
+        {post.category && (
+          <span class="inline-block text-xs font-semibold text-brand bg-brand-50 px-3 py-1 rounded-full mb-4">
+            {post.category}
+          </span>
+        )}
+        <h1 class="text-3xl md:text-4xl font-bold text-odoo-dark leading-tight mb-4">
+          {post.title}
+        </h1>
+        <p class="text-lg text-odoo-muted leading-relaxed mb-6">{post.excerpt}</p>
+
+        <div class="flex items-center gap-4 text-sm text-odoo-muted border-t border-odoo-border pt-5">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-sm font-bold text-brand">
+              {(post.author ?? 'R')[0]}
+            </div>
+            <span>{post.author ?? 'Redaktion'}</span>
+          </div>
+          <span>·</span>
+          <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+          {post.readingTime && <><span>·</span><span>{post.readingTime} Lesezeit</span></>}
+        </div>
+      </header>
+
+      <!-- Hero image — same as Teaser card -->
+      <img
+        src={coverImage}
+        alt={post.title}
+        width="1200"
+        height="630"
+        loading="eager"
+        class="w-full h-72 object-cover rounded-2xl mb-10 shadow-card"
+      />
+
+      <!-- Content -->
+      <div class="text-odoo-text leading-relaxed text-[15px] space-y-4">
+        {post.content ? (
+          <div class="whitespace-pre-line">{post.content}</div>
+        ) : (
+          <p class="text-odoo-muted italic">Kein Inhalt verfügbar.</p>
+        )}
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 p-8 bg-brand-50 rounded-2xl border border-brand-100 text-center">
+        <h3 class="text-xl font-bold text-odoo-dark mb-2">Haben Sie Fragen zu Odoo?</h3>
+        <p class="text-odoo-muted mb-6 text-sm">Wir beraten Sie kostenlos und unverbindlich.</p>
+        <a href="/#contact" class="btn-primary">Kostenlose Erstberatung anfragen</a>
+      </div>
+    </div>
+  </main>
+
+  <Footer
+    companyName={gl?.companyName}
+    footerText={gl?.footerText}
+    phone={gl?.phone}
+    email={gl?.email}
+    address={gl?.address}
+    city={gl?.city}
+    postalCode={gl?.postalCode}
+    linkedinUrl={gl?.linkedinUrl}
+  />
+</Layout>

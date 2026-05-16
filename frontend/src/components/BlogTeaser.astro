@@ -8,62 +8,92 @@ interface Props {
 const { posts } = Astro.props;
 
 const displayPosts = posts.length > 0 ? posts : [
-  { id: 1, documentId: '', title: 'Odoo 17 vs. SAP Business One: Der grosse Vergleich', excerpt: 'Welches ERP-System passt zu Ihrem Unternehmen?', category: 'ERP Vergleich', author: 'Mike Gibert', readingTime: '5 min', publishedAt: new Date().toISOString(), slug: 'odoo-vs-sap', createdAt: '', updatedAt: '' },
-  { id: 2, documentId: '', title: '10 Zeichen, dass Ihr Unternehmen ein neues ERP braucht', excerpt: 'Excel-Chaos, fehlende Transparenz – kennen Sie das?', category: 'ERP Beratung', author: 'Mike Gibert', readingTime: '4 min', publishedAt: new Date().toISOString(), slug: '10-zeichen', createdAt: '', updatedAt: '' },
-  { id: 3, documentId: '', title: 'Odoo Implementierung: So gelingt der Go-Live', excerpt: 'Best Practices fuer eine erfolgreiche Odoo-Einfuehrung.', category: 'Implementierung', author: 'Mike Gibert', readingTime: '6 min', publishedAt: new Date().toISOString(), slug: 'go-live', createdAt: '', updatedAt: '' },
+  { id: 1, documentId: '', title: 'Odoo 17 vs. SAP Business One: Der große Vergleich', excerpt: 'Welches ERP-System passt zu Ihrem Unternehmen? Wir vergleichen Funktionsumfang, Kosten und Implementierungsaufwand.', category: 'ERP Vergleich', author: 'Mike Gibert', readingTime: '5 min', publishedAt: new Date().toISOString(), slug: 'odoo-17-vs-sap-business-one-vergleich', createdAt: '', updatedAt: '' },
+  { id: 2, documentId: '', title: '10 Zeichen, dass Ihr Unternehmen ein neues ERP braucht', excerpt: 'Excel-Chaos, fehlende Transparenz, doppelte Datenpflege – kennen Sie das?', category: 'ERP Beratung', author: 'Mike Gibert', readingTime: '4 min', publishedAt: new Date().toISOString(), slug: '10-zeichen-neues-erp-system', createdAt: '', updatedAt: '' },
+  { id: 3, documentId: '', title: 'Odoo Implementierung: So gelingt der Go-Live', excerpt: 'Best Practices für eine erfolgreiche Odoo-Einführung ohne Budget-Überraschungen.', category: 'Implementierung', author: 'Mike Gibert', readingTime: '6 min', publishedAt: new Date().toISOString(), slug: 'odoo-implementierung-go-live-best-practices', createdAt: '', updatedAt: '' },
 ] as BlogPost[];
+
+// Topic-matched images from Unsplash
+const topicImages: Record<string, string> = {
+  'ERP Vergleich':   'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&q=80',
+  'ERP Beratung':    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=400&fit=crop&q=80',
+  'Implementierung': 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=400&fit=crop&q=80',
+};
+
+const fallbackImages = [
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=400&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=400&fit=crop&q=80',
+];
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 const categoryColors: Record<string, string> = {
-  'ERP Vergleich': 'bg-blue-50 text-blue-700',
-  'ERP Beratung': 'bg-purple-50 text-purple-700',
+  'ERP Vergleich':   'bg-blue-50 text-blue-700',
+  'ERP Beratung':    'bg-purple-50 text-purple-700',
   'Implementierung': 'bg-green-50 text-green-700',
 };
 ---
 
 <section id="blog" class="py-20 lg:py-28 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12">
       <div>
-        <span class="text-brand font-semibold text-sm uppercase tracking-wider">Blog & Insights</span>
-        <h2 class="section-title mt-2">Aktuelles aus der Odoo-Welt</h2>
+        <span class="inline-block text-brand font-semibold text-xs uppercase tracking-widest mb-3">Blog & Insights</span>
+        <h2 class="section-title">Aktuelles aus der Odoo-Welt</h2>
       </div>
       <a href="/blog" class="mt-4 sm:mt-0 text-brand font-semibold text-sm hover:underline inline-flex items-center gap-1">
         Alle Artikel
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
       </a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {displayPosts.map((post, idx) => (
-        <article class="card flex flex-col group">
-          <div class="flex items-center justify-between mb-4">
-            <span class={`text-xs font-semibold px-2 py-1 rounded ${categoryColors[post.category || ''] || 'bg-brand-50 text-brand'}`}>
-              {post.category || 'Odoo'}
-            </span>
-            <span class="text-odoo-muted text-xs">{post.readingTime || '4 min'}</span>
-          </div>
+      {displayPosts.map((post, idx) => {
+        const img = topicImages[post.category ?? ''] ?? fallbackImages[idx % fallbackImages.length];
+        return (
+          <article class="group bg-white rounded-2xl border border-odoo-border overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
 
-          <div class={`h-36 rounded-xl mb-4 flex items-center justify-center ${idx === 0 ? 'bg-gradient-to-br from-brand to-brand-light' : idx === 1 ? 'bg-gradient-to-br from-teal-dark to-teal' : 'bg-gradient-to-br from-brand-800 to-brand-600'}`}>
-            <svg class="w-12 h-12 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-          </div>
+            <!-- Cover image -->
+            <a href={`/blog/${post.slug}`} class="block overflow-hidden">
+              <img
+                src={img}
+                alt={post.title}
+                width="800"
+                height="400"
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </a>
 
-          <h3 class="font-bold text-odoo-dark text-base leading-snug mb-2 group-hover:text-brand transition-colors flex-grow">
-            {post.title}
-          </h3>
-          <p class="text-odoo-muted text-sm leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
+            <div class="p-5 flex flex-col flex-grow">
+              <div class="flex items-center justify-between mb-3">
+                <span class={`text-xs font-semibold px-2 py-0.5 rounded-full ${categoryColors[post.category ?? ''] ?? 'bg-brand-50 text-brand'}`}>
+                  {post.category ?? 'Odoo'}
+                </span>
+                <span class="text-odoo-muted text-xs">{post.readingTime ?? '4 min'}</span>
+              </div>
 
-          <div class="flex items-center justify-between mt-auto pt-4 border-t border-odoo-border">
-            <span class="text-xs text-odoo-muted">{formatDate(post.publishedAt)}</span>
-            <a href={`/blog/${post.slug}`} class="text-brand text-xs font-semibold hover:underline">Weiterlesen →</a>
-          </div>
-        </article>
-      ))}
+              <h3 class="font-bold text-odoo-dark text-sm leading-snug mb-2 group-hover:text-brand transition-colors flex-grow">
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </h3>
+              <p class="text-odoo-muted text-xs leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
+
+              <div class="flex items-center justify-between mt-auto pt-3 border-t border-odoo-border">
+                <span class="text-xs text-odoo-muted">{formatDate(post.publishedAt)}</span>
+                <a href={`/blog/${post.slug}`} class="text-brand text-xs font-semibold hover:underline">
+                  Weiterlesen →
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
